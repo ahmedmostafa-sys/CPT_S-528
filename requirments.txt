@@ -1,0 +1,13 @@
+torch
+torchvision
+torchaudio
+open_clip_torch
+diffusers
+transformers
+accelerate
+safetensors
+pillow
+pyyaml
+scikit-learn
+tqdm
+tensorboard

@@ -1,0 +1,38 @@
+name: dsct-env
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+
+dependencies:
+  # ---- Core Python + utilities ----
+  - python=3.9
+  - pip>=23.3
+  - numpy
+  - pandas
+  - scikit-learn
+  - pillow
+  - tqdm
+  - pyyaml
+  - matplotlib
+  - psutil
+  - rich
+  - tensorboard
+
+  # ---- PyTorch stack (use pip to ensure CUDA match) ----
+  - pytorch
+  - torchvision
+  - torchaudio
+
+  # ---- Install rest via pip to avoid Conda solver issues ----
+  - pip:
+      - diffusers==0.24.0
+      - huggingface_hub==0.19.4
+      - transformers==4.36.2
+      - accelerate==0.25.0
+      - safetensors==0.4.2
+      - open_clip_torch==2.24.0
+      - opencv-python==4.9.0.80
+      - timm==0.9.16
+      - requests>=2.31.0

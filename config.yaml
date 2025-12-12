@@ -1,0 +1,47 @@
+# ---------------- Core ----------------
+device: "cuda"         # "cuda" or "cpu"
+seed: 42
+
+# ---------------- Data ----------------
+id_root: "./data"      # e.g., ./data/{dog,cat,car}/...
+ood_root: "./ood_data" # a folder full of OOD images
+class_names: ["dog", "cat", "car"]
+
+# ---------------- Model ----------------
+clip_arch: "ViT-B-16"
+clip_pretrained: "openai"
+sd_vae_repo: "runwayml/stable-diffusion-v1-5"
+sd_repo: "runwayml/stable-diffusion-v1-5"
+sd_inpaint_repo: "runwayml/stable-diffusion-inpainting"
+
+# ---------------- Training ----------------
+epochs: 10
+batch_size: 8
+num_workers: 4
+image_size: 224
+lr: 1.0e-5
+weight_decay: 1.0e-4
+
+# ---------------- DSCT toggles & knobs ----------------
+use_dsg: true           # diffusion-based pseudo-OOD generation
+use_bpi: true           # background purification via inpainting
+use_ruc: true           # reconstruction-weighted calibration
+sigma: 0.05             # DSG latent noise scale (if needed)
+lambda_ood: 0.5
+alpha_ruc: 0.3
+beta_align: 0.1
+
+negative_pool:          # prompts for pseudo-OOD synthesis
+  - "orange fruit"
+  - "drone"
+  - "robot arm"
+  - "microscope"
+  - "spaceship"
+
+# ---------------- Eval (RUC) ----------------
+gamma_ruc: 0.5          # u = gamma*H + (1-gamma)*Erec
+sim_scale: 100.0        # scaling for CLIP logits
+
+# ---------------- Logging & Checkpoints ----------------
+log_dir: "./runs/dsct"
+ckpt_path: "./checkpoints/dsct_clip.pth"
